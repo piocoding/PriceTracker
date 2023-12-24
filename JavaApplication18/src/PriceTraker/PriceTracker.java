@@ -18,6 +18,8 @@ public class PriceTracker {
         System.out.println("Hiiiijjj");
         System.out.println("test");
         System.out.println("hiii");
+        System.out.println("hiii");
+        
     }
     
 }
