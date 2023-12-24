@@ -15,6 +15,9 @@ public class PriceTracker {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("Hiiiijjj");
+        System.out.println("test");
+        System.out.println("hiii");
     }
     
 }
