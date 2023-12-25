@@ -85,7 +85,7 @@ public class Login {
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("There already exists an account with the same username.");
+            System.out.println("ERROR creating account. (There might already exist an account with the same username.)");
         }
     }
 }
