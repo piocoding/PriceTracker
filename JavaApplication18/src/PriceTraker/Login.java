@@ -35,7 +35,7 @@ public class Login {
         System.out.print("Password: ");
         String pass = scn.next();
         
-        String url = "jdbc:mysql://localhost:3306/lookup_item";
+        String url = "jdbc:mysql://localhost:3306/accounts";
         String username = "root";
         String password = "Allahswt24434!";
         
@@ -70,7 +70,7 @@ public class Login {
         System.out.print("Set Password: ");
         String pass = scn.next();
         
-        String url = "jdbc:mysql://localhost:3306/lookup_item";
+        String url = "jdbc:mysql://localhost:3306/accounts";
         String username = "root";
         String password = "Allahswt24434!";
         
