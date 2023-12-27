@@ -7,7 +7,7 @@ import java.sql.*;
 // 2 columns, (username, PRIMARY KEY, varchar(20)), (password, varchar(20))
 public class Login {
     
-    public Login(){
+    public Login(String u){
         Scanner scn = new Scanner(System.in);
         
         boolean status = false;
@@ -15,10 +15,10 @@ public class Login {
             System.out.println("1. Login \n2. Registration");
             int ans = scn.nextInt();
             if ( ans == 1 ) {
-                LoginUI(status);
+                LoginUI(status, u);
             }
             else if ( ans == 2 ) {
-                RegistrationUI(status);
+                RegistrationUI(status, u);
             }
             else {
                 System.out.println("invalid choice.");
@@ -26,12 +26,13 @@ public class Login {
         }
     }
     
-    public void LoginUI(boolean status){
+    public void LoginUI(boolean status, String u){
         Scanner scn = new Scanner(System.in);
         
         System.out.println("–Login–––");
         System.out.print("Username: ");
         String user = scn.next();
+        u = user;
         System.out.print("Password: ");
         String pass = scn.next();
         
@@ -78,10 +79,10 @@ public class Login {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url,username,password);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("INSERT INTO accounts VALUES ('" + user + "', '" + pass + "');");
+            ResultSet resultSet = statement.executeQuery("INSERT INTO APP.TRYACCOUNTS VALUES ('" + user + "', '" + pass + "')\n SELECT * FROM accounts;");
             connection.close();
             System.out.println("Successfully registered account.");
-            LoginUI(status);
+            LoginUI(status, u);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
