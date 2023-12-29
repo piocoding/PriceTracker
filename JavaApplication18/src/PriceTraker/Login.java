@@ -8,7 +8,7 @@ import java.sql.*;
 public class Login {
     private boolean status;
     
-    public Login(String u){
+    public Login(String[] u){
         Scanner scn = new Scanner(System.in);
         
         status = false;
@@ -28,13 +28,13 @@ public class Login {
         
     }
     
-    public void LoginUI(String u){
+    public void LoginUI(String[] u){
         Scanner scn = new Scanner(System.in);
         
         System.out.println("–Login–––");
         System.out.print("Username: ");
         String user = scn.next();
-        u = user;
+        u[0] = user;
         System.out.print("Password: ");
         String pass = scn.next();
         
@@ -64,7 +64,7 @@ public class Login {
         }
     }
     
-    public void RegistrationUI(String u){
+    public void RegistrationUI(String[] u){
         Scanner scn = new Scanner(System.in);
         
         System.out.println("–Registeration–––");
@@ -91,3 +91,4 @@ public class Login {
         }
     }
 }
+
