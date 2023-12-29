@@ -14,7 +14,9 @@ public class PriceTracker {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String username = "";
+        
+        String[] username = new String[1];
+        
         Login login = new Login(username);
     }
     
