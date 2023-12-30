@@ -19,7 +19,7 @@ public class ShoppingCart {
 
         Connection connection = DriverManager.getConnection(url, username, password);
 
-        String query = "INSERT INTO shopping_cart (user_id, product_id, quantity) VALUES (?, ?, ?)";
+        String query = "INSERT INTO shopping_cart (user_id, item_name, item_subtotal) VALUES (?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, userId);
