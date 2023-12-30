@@ -27,7 +27,7 @@ public class CheapestSellers {
             String sqlQuery = "SELECT DISTINCT p.premise_code, p.item_code, p.price, lp.address, lp.premise " +
                               "FROM pricecatchers_aug2023 p " +  
                               "JOIN lookup_premise.lookup_premise lp ON p.premise_code = lp.premise_code " +
-                              "WHERE p.item_code = 60 " +
+                              "WHERE p.item_code = 221 " +
                               "ORDER BY p.price ASC " +
                               "LIMIT 5";
 
