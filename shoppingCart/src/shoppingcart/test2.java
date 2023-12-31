@@ -11,7 +11,7 @@ import java.sql.PreparedStatement; // Used for prepared statements
 import java.sql.Statement; // Used for executing SQL statements
 import java.sql.ResultSet; // Represents a table of data resulting from a query
 import java.sql.SQLException; // Handles SQL exceptions
-import java.sql.*; // Handles SQL exceptions
+import java.sql.*; //x tahu nk import apa for resultmetadata 
 
 import java.util.Scanner;
 
