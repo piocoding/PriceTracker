@@ -22,8 +22,9 @@ public class test2 {
     static String pass = "123";
     static Scanner scan = new Scanner(System.in);
     
-    
+    // nak tambah brp dlm  cart
     public static void addExistingItem(String username, String Item_code, int quantity){
+        System.out.println("");
         
         try{
           Connection connect = DriverManager.getConnection(url,user,pass);
@@ -32,7 +33,7 @@ public class test2 {
           ResultSet result= statement.executeQuery(query);
           while (result.next()) {
               
-                if (result.getString(2).equals(username) && result.getString(3).equals(Item_code)) {
+                if (result.getString(1).equals(username) && result.getString(2).equals(Item_code)) {
                     
                    
                     String insertQuery = "UPDATE shopping_cart SET Item_quantity = Item_quantity + ? WHERE Item_code = ?";
@@ -54,8 +55,10 @@ public class test2 {
        }
         
     }
+    // nak ganti terus item quantity barang tu
     
     public static void replaceExistingItem(String username, String Item_code){
+        System.out.println("");
         
         try{
           Connection connect = DriverManager.getConnection(url,user,pass);
@@ -64,7 +67,7 @@ public class test2 {
           ResultSet result= statement.executeQuery(query);
           while (result.next()) {
               
-                if (result.getString(2).equals(username) && result.getString(3).equals(Item_code)) {
+                if (result.getString(1).equals(username) && result.getString(2).equals(Item_code)) {
                     
                     System.out.print("Please enter the quantity that you wish to replace into the existing product: ");
                     int x =scan.nextInt();
@@ -88,6 +91,7 @@ public class test2 {
         
     }
     public static void DisplayCart(String username) throws SQLException{
+        System.out.println("");
         
         
        try{
@@ -120,6 +124,7 @@ public class test2 {
     }
     
     public static void AddtoCart(String username ,String Item_code) throws SQLException{
+        System.out.println("");
 
         try (Connection connect = DriverManager.getConnection(url, user, pass)) {
             Statement statement = connect.createStatement();
@@ -169,6 +174,7 @@ public class test2 {
     }
     
     public static void Deleteitem(String username, String Item_code){
+        System.out.println("");
         
         System.out.print("Type the quantity of "+Item_code+" you want to remove from your cart: ");
         int delete=scan.nextInt();
