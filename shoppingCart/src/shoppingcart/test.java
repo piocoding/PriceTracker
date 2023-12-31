@@ -4,15 +4,30 @@
  */
 package shoppingcart;
 
+import java.sql.SQLException;
+import static shoppingcart.test2.*;
+
 public class test {
     public static void main(String[] args) {
-        ShoppingCart x = new ShoppingCart();
-        String itemName = "Milo";
-        int userId=1;
-        
-        
-        x.addItemToShoppingCart(userId, itemName, 3);
-        
+       try {
+            
+           //AddtoCart("iskandar", "AYAM SUPER");
+          // Deleteitem("iskandar","AYAM SUPER");
+           //AddtoCart("iskandar", "MILO");
+         //  AddtoCart("adwad", "AYAM SUPER");
+         //  AddtoCart("adwad", "MILO");
+         // DisplayCart("iskandar");
+          // DisplayCart("adwad");
+           //Deleteitem("iskandar", "AYAM SUPER");
+          // Deleteitem("adwad", "AYAM SUPER");
+            // DisplayCart("afq");
+           //    DisplayCart("adwad");
+            //AddtoCart("iskandar", "MILO");
+            DisplayCart("iskandar");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       
     }
     
 }

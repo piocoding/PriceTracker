@@ -4,41 +4,24 @@
  */
 package shoppingcart;
 
+//import com.mysql.cj.jdbc.result.*;
 import java.sql.Connection; // Represents a connection to the database
 import java.sql.DriverManager; // Helps in obtaining a connection to the database
 import java.sql.PreparedStatement; // Used for prepared statements
 import java.sql.Statement; // Used for executing SQL statements
 import java.sql.ResultSet; // Represents a table of data resulting from a query
 import java.sql.SQLException; // Handles SQL exceptions
+import java.sql.*; // Handles SQL exceptions
+
 import java.util.Scanner;
 
 
 public class test2 {
-      static String url = "jdbc:mysql://localhost:3306/csv_db 7";
+    static String url = "jdbc:mysql://localhost:3306/csv_db 7";
     static String user = "iskandar";
     static String pass = "123";
     static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args) {
-       try {
-            
-           AddtoCart("iskandar", "AYAM SUPER");
-//            Deleteitem("afq","SAYUR");
-           AddtoCart("iskandar", "MILO");
-         //  AddtoCart("adwad", "AYAM SUPER");
-         //  AddtoCart("adwad", "MILO");
-           DisplayCart("iskandar");
-          // DisplayCart("adwad");
-           //Deleteitem("iskandar", "AYAM SUPER");
-          // Deleteitem("adwad", "AYAM SUPER");
-            // DisplayCart("afq");
-           //    DisplayCart("adwad");
-            AddtoCart("iskandar", "MILO");
-            DisplayCart("iskandar");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-       
-    }
+    
     
     public static void addExistingItem(String username, String Item_code, int quantity){
         
@@ -113,16 +96,23 @@ public class test2 {
           String query ="SELECT * FROM shopping_cart where username=Username";
           ResultSet result= statement.executeQuery(query);
           System.out.println("Your Shopping Cart: ");
-          while(result.next()){
-              if(result.getString(2).equals(username)){
-               String items="";
-               for (int i = 4; i >= 3; i--) {
-                  items+= result.getString(i)+" ";
-              }
-              
-               System.out.println(items);
-              }
-          }
+                      if (result.next()) {
+                // If a row was returned, create a ResultSetMetaData object to get metadata about the columns
+                ResultSetMetaData metadata = result.getMetaData();
+
+                System.out.print("");
+
+                // Print column values 
+                do {
+                    for (int i = 2; i <= metadata.getColumnCount(); i++) {
+                        System.out.print(result.getString(i) + "\t");
+                    }
+                    System.out.println();
+                } while (result.next());
+            } else {
+                System.out.println("No item in your cart add now");
+            }
+
        }catch(SQLException e){
            e.printStackTrace();
        }
@@ -189,9 +179,9 @@ public class test2 {
           ResultSet result= statement.executeQuery(query);
           while (result.next()) {
               
-                if (result.getString(2).equals(username) && result.getString(3).equals(Item_code)) {
+                if (result.getString(1).equals(username) && result.getString(2).equals(Item_code)) {
                     
-                    if(delete>result.getInt(4)){
+                    if(delete> result.getInt(3)){
                         System.out.println("The Amount you ask exceed the actual amount of "+Item_code);
                         System.out.println("Press 0 if you want to exit or press 1 to continue");
                         int y=scan.nextInt();
@@ -211,7 +201,7 @@ public class test2 {
                     int rowsAffected = preparedStatement.executeUpdate();
                     
                     
-                    if(result.getInt(4)==delete ){
+                    if(result.getInt(3)==delete ){
                        PreparedStatement preparedStatement2 = connect.prepareStatement   ("DELETE  FROM shopping_cart  WHERE Item_quantity <= 0");
                        preparedStatement2.executeUpdate();
                     }
