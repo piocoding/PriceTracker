@@ -11,9 +11,9 @@ public class test {
     public static void main(String[] args) {
        try {
             
-           //AddtoCart("iskandar", "AYAM SUPER");
-           //Deleteitem("iskandar","AYAM SUPER");
-           //AddtoCart("iskandar", "MILO");
+           //  AddtoCart("iskandar", "MILO");
+           Deleteitem("iskandar","AYAM SUPER");
+           //replaceExistingItem("iskandar", "MILO");
          //  AddtoCart("adwad", "AYAM SUPER");
          //  AddtoCart("adwad", "MILO");
          // DisplayCart("iskandar");
@@ -21,7 +21,7 @@ public class test {
            //Deleteitem("iskandar", "AYAM SUPER");
           // Deleteitem("adwad", "AYAM SUPER");
             // DisplayCart("afq");
-            replaceExistingItem("iskandar","AYAM SUPER");
+           // replaceExistingItem("iskandar","AYAM SUPER");
             // addd quatity in existing item
             //addExistingItem("iskandar","AYAM SUPER",9);
            //    DisplayCart("adwad");

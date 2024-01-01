@@ -84,6 +84,8 @@ public class test2 {
                     
                     return;
                 }
+                else 
+                    System.out.println("item not found");
             }
        }catch(SQLException e){
            e.printStackTrace();
@@ -133,7 +135,7 @@ public class test2 {
             
             while (result.next()) {
                
-                if (result.getString(2).equals(username) && result.getString(3).equals(Item_code)){
+                if (result.getString(1).equals(username) && result.getString(3).equals(Item_code)){
                     System.out.println("The product that you want to add has " +result.getInt(4)+ " already.");
                     System.out.print(" Type The Quantity of " + Item_code + " : ");
 
