@@ -13,7 +13,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class CheapestSellers {
-    public static void main(String[] args) {
+    //ni letak dkt main 
+    //CheapestSellers cs = new CheapestSellers(int[] item_code);
+    public CheapestSellers(int[] code){
+        itemCode = code[0];
         try {
             
             Connection connection = DriverManager.getConnection(
@@ -27,7 +30,7 @@ public class CheapestSellers {
             String sqlQuery = "SELECT DISTINCT p.premise_code, p.item_code, p.price, lp.address, lp.premise " +
                               "FROM pricecatchers_aug2023 p " +  
                               "JOIN lookup_premise.lookup_premise lp ON p.premise_code = lp.premise_code " +
-                              "WHERE p.item_code = 221 " +
+                              "WHERE p.item_code = " + itemCode +
                               "ORDER BY p.price ASC " +
                               "LIMIT 5";
 
@@ -45,7 +48,7 @@ public class CheapestSellers {
                   premiseNumber, premise, price, address);
 
                     premiseNumber++; 
-                }
+            }
 
             resultSet.close();
             statement.close();
