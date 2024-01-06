@@ -16,7 +16,7 @@ import java.sql.*; //x tahu nk import apa for resultmetadata
 import java.util.Scanner;
 
 
-public class test2 {
+public class BasicShoppinngCart {
     static String url = "jdbc:mysql://localhost:3306/csv_db 7";
     static String user = "iskandar";
     static String pass = "123";
@@ -57,41 +57,7 @@ public class test2 {
     }
     // nak ganti terus item quantity barang tu
     
-    public static void replaceExistingItem(String username, String Item_code){
-        System.out.println("");
-        
-        try{
-          Connection connect = DriverManager.getConnection(url,user,pass);
-          Statement statement = connect.createStatement();
-          String query ="SELECT * FROM shopping_cart where username=Username";
-          ResultSet result= statement.executeQuery(query);
-          while (result.next()) {
-              
-                if (result.getString(1).equals(username) && result.getString(2).equals(Item_code)) {
-                    
-                    System.out.print("Please enter the quantity that you wish to replace into the existing product: ");
-                    int x =scan.nextInt();
-                    String insertQuery = "UPDATE shopping_cart SET Item_quantity = ? WHERE Item_code = ?";
-                    PreparedStatement preparedStatement = connect.prepareStatement(insertQuery);
-                    preparedStatement.setInt(1, x);
-                    preparedStatement.setString(2,Item_code);
-                    int rowsAffected = preparedStatement.executeUpdate();
-                    if (rowsAffected > 0) {
-                        System.out.println("Quantity(s) updated to cart successfully.");
-                    } else {
-                        System.out.println("Failed to update to cart.");
-                        }
-                    
-                    return;
-                }
-                else 
-                    System.out.println("item not found");
-            }
-       }catch(SQLException e){
-           e.printStackTrace();
-       }
-        
-    }
+    
     public static void DisplayCart(String username) throws SQLException{
         System.out.println("");
         
@@ -106,11 +72,13 @@ public class test2 {
                 // If a row was returned, create a ResultSetMetaData object to get metadata about the columns
                 ResultSetMetaData metadata = result.getMetaData();
 
-                System.out.print("");
+
+               
+               System.out.println("Item \t Quantity");
 
                 // Print column values 
                 do {
-                    for (int i = 2; i <= metadata.getColumnCount(); i++) {
+                    for (int i = 3; i <= metadata.getColumnCount(); i++) {
                         System.out.print(result.getString(i) + "\t");
                     }
                     System.out.println();
@@ -125,7 +93,7 @@ public class test2 {
 
     }
     
-    public static void AddtoCart(String username ,String Item_code) throws SQLException{
+    public static void AddtoCart(String username ,String item,String Item_code) throws SQLException{
         System.out.println("");
 
         try (Connection connect = DriverManager.getConnection(url, user, pass)) {
@@ -135,9 +103,9 @@ public class test2 {
             
             while (result.next()) {
                
-                if (result.getString(1).equals(username) && result.getString(3).equals(Item_code)){
+                if (result.getString(1).equals(username) && result.getString(3).equals(item)){
                     System.out.println("The product that you want to add has " +result.getInt(4)+ " already.");
-                    System.out.print(" Type The Quantity of " + Item_code + " : ");
+                    System.out.print(" Type The Quantity of " + item + " : ");
 
                     int quantity = scan.nextInt();
                     if (quantity == 0) {
@@ -148,21 +116,22 @@ public class test2 {
                 }
                 
             }
-            System.out.print(" Type The Quantity of " + Item_code + " : ");
+            System.out.print(" Type The Quantity of " + item + " : ");
 
             int quantity = scan.nextInt();
             if (quantity == 0) {
                 return;
             }
 
-            String insertQuery = "INSERT INTO shopping_cart (Username,Item_code,Item_quantity) VALUES ( ?,?,?)";
+            String insertQuery = "INSERT INTO shopping_cart (Username,Item_code,Item,Item_quantity) VALUES ( ?,?,?,?)";
             PreparedStatement preparedStatement = connect.prepareStatement(insertQuery);
 
             // Set the values for the parameters in the prepared statement
             
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, Item_code);
-            preparedStatement.setInt(3, quantity);
+            preparedStatement.setString(3, item);
+            preparedStatement.setInt(4, quantity);
 // Execute the query
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -175,10 +144,10 @@ public class test2 {
         }
     }
     
-    public static void Deleteitem(String username, String Item_code){
+    public static void Deleteitem(String username, String Item_code,String Item){
         System.out.println("");
         
-        System.out.print("Type the quantity of "+Item_code+" you want to remove from your cart: ");
+        System.out.print("Type the quantity of "+Item+" you want to remove from your cart: ");
         int delete=scan.nextInt();
          try{
           Connection connect = DriverManager.getConnection(url,user,pass);
@@ -189,15 +158,15 @@ public class test2 {
               
                 if (result.getString(1).equals(username) && result.getString(2).equals(Item_code)) {
                     
-                    if(delete> result.getInt(3)){
-                        System.out.println("The Amount you ask exceed the actual amount of "+Item_code);
+                    if(delete> result.getInt(4)){
+                        System.out.println("The Amount you ask exceed the actual amount of "+Item);
                         System.out.println("Press 0 if you want to exit or press 1 to continue");
                         int y=scan.nextInt();
                         if (y==0)
                             return;
                         else{
                             System.out.println("Please enter suitable amount");
-                            Deleteitem(username, Item_code);
+                            Deleteitem(username, Item_code,Item);
                             return;
                         }
                     }
@@ -209,7 +178,7 @@ public class test2 {
                     int rowsAffected = preparedStatement.executeUpdate();
                     
                     
-                    if(result.getInt(3)==delete ){
+                    if(result.getInt(4)==delete ){
                        PreparedStatement preparedStatement2 = connect.prepareStatement   ("DELETE  FROM shopping_cart  WHERE Item_quantity <= 0");
                        preparedStatement2.executeUpdate();
                     }
@@ -230,5 +199,6 @@ public class test2 {
        }
          
     }
+    
 }
 

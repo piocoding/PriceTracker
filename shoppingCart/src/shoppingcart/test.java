@@ -5,14 +5,22 @@
 package shoppingcart;
 
 import java.sql.SQLException;
-import static shoppingcart.test2.*;
+import static shoppingcart.BasicShoppinngCart.*;
+
 
 public class test {
     public static void main(String[] args) {
        try {
-            
-           //  AddtoCart("iskandar", "MILO");
-           Deleteitem("iskandar","AYAM SUPER");
+            viewCart k = new viewCart();
+//           AddtoCart("iskandar", "BETIK BIASA","16");
+//           AddtoCart("iskandar", "PISANG EMAS","19");
+//           AddtoCart("iskandar", "LAI KUNING (SAIZ M)","31");
+//           AddtoCart("iskandar", "CILI MERAH - KULAI ","93");
+        // AddtoCart("iskandar", "AYAM HIDUP","3");
+         AddtoCart("iskandar", "AYAM super","2");
+//          AddtoCart("iskandar", "TIMUN","113");
+         //AddtoCart("iskandar", "Tembikai susu","24");
+         //Deleteitem("iskandar","5","MILO");^
            //replaceExistingItem("iskandar", "MILO");
          //  AddtoCart("adwad", "AYAM SUPER");
          //  AddtoCart("adwad", "MILO");
@@ -25,8 +33,9 @@ public class test {
             // addd quatity in existing item
             //addExistingItem("iskandar","AYAM SUPER",9);
            //    DisplayCart("adwad");
-            //AddtoCart("iskandar", "MILO");
-            DisplayCart("iskandar");
+            //AddtoCart("iskandar", "MILO")
+           k.ViewbyShop("iskandar");
+           // DisplayCart("iskandar");
         } catch (SQLException e) {
             e.printStackTrace();
         }
