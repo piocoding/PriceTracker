@@ -13,7 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class PriceTrend {
-    public static void main(String[] args) {
+    public PriceTrend(int[] code){
+        int itemCode = code[0];
         
         try {
             
@@ -24,13 +25,13 @@ public class PriceTrend {
             );
 
             String sqlQuery = "SELECT DAY(p.date) AS Day, " +
-                              "CONCAT(REPEAT('$', ROUND(AVG(p.price) / 0.30))) AS Price, " +
-                              "i.item " +
-                              "FROM pricecatchers_aug2023 p " +
-                              "JOIN lookup_item.lookup_item i ON p.item_code = i.item_code " +
-                              "WHERE p.item_code = '21' " + 
-                              "GROUP BY Day, i.item " +
-                              "ORDER BY Day";
+                  "CONCAT(REPEAT('$', ROUND(AVG(p.price) / 0.30))) AS Price, " +
+                  "i.item " +
+                  "FROM pricecatchers_aug2023 p " +
+                  "JOIN lookup_item.lookup_item i ON p.item_code = i.item_code " +
+                  "WHERE p.item_code = " + itemCode + " " + 
+                  "GROUP BY Day, i.item " +
+                  "ORDER BY Day";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
 
