@@ -21,7 +21,7 @@ public class viewCart {
     
    public void ViewbyShop(String user)throws SQLException{
         try (Connection connect = DriverManager.getConnection(url, user, pass)) {
-             Statement statement = connect.createStatement();
+            Statement statement = connect.createStatement();
             String query ="SELECT * FROM shopping_cart where username=Username";
            
             ResultSet result = statement.executeQuery(query);

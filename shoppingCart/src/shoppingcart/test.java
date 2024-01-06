@@ -12,6 +12,8 @@ public class test {
     public static void main(String[] args) {
        try {
             viewCart k = new viewCart();
+            viewItem j = new viewItem();
+            j.viewCheapest("iskandar");
 //           AddtoCart("iskandar", "BETIK BIASA","16");
 //           AddtoCart("iskandar", "PISANG EMAS","19");
 //           AddtoCart("iskandar", "LAI KUNING (SAIZ M)","31");
@@ -34,7 +36,7 @@ public class test {
             //addExistingItem("iskandar","AYAM SUPER",9);
            //    DisplayCart("adwad");
             //AddtoCart("iskandar", "MILO")
-           k.ViewbyShop("iskandar");
+          // k.ViewbyShop("iskandar");
            // DisplayCart("iskandar");
         } catch (SQLException e) {
             e.printStackTrace();
