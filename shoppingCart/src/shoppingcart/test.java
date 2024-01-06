@@ -17,7 +17,7 @@ public class test {
 //           AddtoCart("iskandar", "LAI KUNING (SAIZ M)","31");
 //           AddtoCart("iskandar", "CILI MERAH - KULAI ","93");
         // AddtoCart("iskandar", "AYAM HIDUP","3");
-         AddtoCart("iskandar", "AYAM super","2");
+       //  AddtoCart("iskandar", "AYAM super","2");
 //          AddtoCart("iskandar", "TIMUN","113");
          //AddtoCart("iskandar", "Tembikai susu","24");
          //Deleteitem("iskandar","5","MILO");^
