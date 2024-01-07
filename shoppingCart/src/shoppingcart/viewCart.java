@@ -18,11 +18,25 @@ public class viewCart {
      Scanner scan = new Scanner(System.in);
      int[] itemcode = new int [100];
      int count =0;
+     public  viewCart(String [] u) throws SQLException{
+         
+         System.out.println("Select options");
+         System.out.println("1. View cheapest seller for all selected items");
+         System.out.println("2. Find shops to buy items in cart");
+         int choice = scan.nextInt();
+         switch (choice) {
+             case 1:   ViewbyShop( u);
+                       break;
+             case 2:  viewCheapest(u);
+                      break;
+         }
+         
+     }
     
-   public void ViewbyShop(String user)throws SQLException{
+   public void ViewbyShop(String [] u)throws SQLException{
         try (Connection connect = DriverManager.getConnection(url, user, pass)) {
             Statement statement = connect.createStatement();
-            String query ="SELECT * FROM shopping_cart where username=Username";
+            String query ="SELECT * FROM shopping_cart where Username= '" + u[0] + "'";
            
             ResultSet result = statement.executeQuery(query);
             
@@ -49,7 +63,7 @@ public class viewCart {
                      premise = result2.getString(6);
                      String insertQuery = "INSERT INTO tempfindshop (Username,Item_code,premise_code,price,premise) VALUES ( ?,?,?,?,?)";
                      PreparedStatement preparedStatement = connect.prepareStatement(insertQuery);
-                     preparedStatement.setString(1, user);
+                     preparedStatement.setString(1, u[0]);
                      preparedStatement.setInt(2, itemcode[i]);
                      preparedStatement.setInt(3, premise_code);
                      preparedStatement.setDouble(4, price);
@@ -67,7 +81,7 @@ public class viewCart {
             String query5 ="SELECT* FROM tempfindshop ";
             ResultSet result6 = statement.executeQuery(query5);
              while(result6.next()){
-                updateviewbyShop(user);
+                updateviewbyShop(u);
                if(count==0)
                    break;
                
@@ -83,7 +97,7 @@ public class viewCart {
         }
    }
    
-    public void updateviewbyShop(String user)throws SQLException{
+    public void updateviewbyShop(String  [] u)throws SQLException{
         try (Connection connect = DriverManager.getConnection(url, user, pass)) {
             Statement statement = connect.createStatement();
              int premisecode2=0;
@@ -143,5 +157,54 @@ public class viewCart {
         }
     
 
+}
+     public void viewCheapest(String u[]) throws SQLException {
+            try (Connection connect = DriverManager.getConnection(url, user, pass)) {
+                Statement statement = connect.createStatement();
+                String query = "SELECT * FROM shopping_cart where Username= '" + u[0] + "'";
+
+                ResultSet result = statement.executeQuery(query);
+
+                // save item code
+                while (result.next()) {
+                    itemcode[count] = result.getInt(2);
+                    count++;
+                }
+
+                System.out.printf("%-50s%-10s%-60s%-20s%-20s\n", "Item", "Quantity", "Cheapest Premise", "Price per unit", "Subtotal");
+
+                for (int i = 0; i < count; i++) {
+
+                    String query1 = "SELECT * FROM shopping_cart JOIN pricecatcher_2023 JOIN lookup_premise ON (pricecatcher_2023.item_code=shopping_cart.Item_code && pricecatcher_2023.premise_code = lookup_premise.premise_code)";
+                    String query2 = " where (username=Username && shopping_cart.item_code = " + itemcode[i];
+                    String query3 = ") ORDER BY pricecatcher_2023.price ASC;";
+                    ResultSet result1 = statement.executeQuery(query1 + query2 + query3);
+
+                    double price = 0;
+                    double tprice = 0;
+
+                    while (result1.next()) {
+                        price = result1.getDouble(4) * result1.getDouble(8);
+
+                        // item
+                        System.out.printf("%-50s", result1.getString(3));
+                        // quantity
+                        System.out.printf("%-10s", result1.getInt(4));
+                        // premise
+                        System.out.printf("%-60s", result1.getString(10));
+                        // price per unit
+                        System.out.printf("%.2f", result1.getDouble(8));
+                        // subtotal
+                        System.out.printf("%-20s"," ");
+                        System.out.printf("%.2f", price);
+                        tprice += price;
+
+                        System.out.println("");
+                        break;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 }
 }

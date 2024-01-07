@@ -11,32 +11,8 @@ import static shoppingcart.BasicShoppinngCart.*;
 public class test {
     public static void main(String[] args) {
        try {
-            viewCart k = new viewCart();
-            viewItem j = new viewItem();
-            j.viewCheapest("iskandar");
-//           AddtoCart("iskandar", "BETIK BIASA","16");
-//           AddtoCart("iskandar", "PISANG EMAS","19");
-//           AddtoCart("iskandar", "LAI KUNING (SAIZ M)","31");
-//           AddtoCart("iskandar", "CILI MERAH - KULAI ","93");
-        // AddtoCart("iskandar", "AYAM HIDUP","3");
-       //  AddtoCart("iskandar", "AYAM super","2");
-//          AddtoCart("iskandar", "TIMUN","113");
-         //AddtoCart("iskandar", "Tembikai susu","24");
-         //Deleteitem("iskandar","5","MILO");^
-           //replaceExistingItem("iskandar", "MILO");
-         //  AddtoCart("adwad", "AYAM SUPER");
-         //  AddtoCart("adwad", "MILO");
-         // DisplayCart("iskandar");
-          // DisplayCart("adwad");
-           //Deleteitem("iskandar", "AYAM SUPER");
-          // Deleteitem("adwad", "AYAM SUPER");
-            // DisplayCart("afq");
-           // replaceExistingItem("iskandar","AYAM SUPER");
-            // addd quatity in existing item
-            //addExistingItem("iskandar","AYAM SUPER",9);
-           //    DisplayCart("adwad");
-            //AddtoCart("iskandar", "MILO")
-          // k.ViewbyShop("iskandar");
+           String []n ={"iskandar"};
+           viewCart hi = new viewCart(n);
            // DisplayCart("iskandar");
         } catch (SQLException e) {
             e.printStackTrace();
