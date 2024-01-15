@@ -2,6 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package pricetracker_assignment;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 
 /**
  *
@@ -13,21 +18,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class PriceTrend {
-    public PriceTrend(int[] code){
-        int itemCode = code[0];
+    public PriceTrend(String code){
+        String itemCode = code;
         
         try {
             
             Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/pricecatchers_market",
+                "jdbc:mysql://localhost:3306/pricecatcher-2023-08",
                 "root",
-                "Allahswt24434!"
+                "Nurulizzani20."
             );
 
             String sqlQuery = "SELECT DAY(p.date) AS Day, " +
                   "CONCAT(REPEAT('$', ROUND(AVG(p.price) / 0.30))) AS Price, " +
                   "i.item " +
-                  "FROM pricecatchers_aug2023 p " +
+                  "FROM pricecatcher p " +
                   "JOIN lookup_item.lookup_item i ON p.item_code = i.item_code " +
                   "WHERE p.item_code = " + itemCode + " " + 
                   "GROUP BY Day, i.item " +
@@ -39,7 +44,7 @@ public class PriceTrend {
 
             if (resultSet.next()) {
                 String itemName = resultSet.getString("item");
-                System.out.println("Price Trend Chart for " + itemName);
+                System.out.println("\nPrice Trend Chart for " + itemName);
                 System.out.println("");
                 System.out.println(" Days  |   Price");
                 System.out.println("---------------------");
