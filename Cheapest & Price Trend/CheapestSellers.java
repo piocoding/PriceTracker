@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
+package pricetracker_assignment;
 /**
  *
  * @author Chanteq Demo
@@ -22,20 +22,20 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class CheapestSellers {
-    public CheapestSellers(int[] code){
-        int itemCode = code[0];
+    public CheapestSellers(String code){
+        String itemCode = code;
         try {
             
             Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/pricecatchers_market",
+                "jdbc:mysql://localhost:3306/pricecatcher-2023-08",
                 "root",
-                "Allahswt24434!"
+                "Nurulizzani20."
             );
 
             Statement statement = connection.createStatement();
 
             String sqlQuery = "SELECT DISTINCT p.premise_code, p.item_code, p.price, lp.address, lp.premise, li.item " +
-                              "FROM pricecatchers_aug2023 p " +  
+                              "FROM pricecatcher p " +  
                               "JOIN lookup_premise.lookup_premise lp ON p.premise_code = lp.premise_code " +
                               "JOIN lookup_item.lookup_item li ON p.item_code = li.item_code " + 
                               "WHERE p.item_code = " + itemCode + 
