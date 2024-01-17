@@ -53,6 +53,7 @@ public class EditAcc {
         }
         catch (Exception e) {
             System.out.println("There exists another user with the same username.\n");
+            return;
         }
         
         try {
